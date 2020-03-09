@@ -12,21 +12,27 @@ public class Portfolio<T extends Investment> {
     public Portfolio() {
     }
 
-    public boolean contains(T invest) {
+    public boolean contains(T ubs) {
 
-        return investments.contains(invest);
+        for (T shares : investments) {
+            if (shares.equals(ubs)) {
+                return true;
+            }
+
+        } return false;
     }
 
     public void buy(T ubs) {
 
         if (investments.contains(ubs)) {
             for (T shares : investments) {
-                if (shares.equals(ubs)) {
-                    shares.setCount(shares.getCount() + 1);
+                if (!shares.equals(ubs)) {
+                    investments.add(ubs);
                 }
             }
         } else {
-            investments.add(ubs);
+            for(T shares : investments)
+            shares.setCount(shares.getCount() + 1);
         }
     }
 
@@ -48,10 +54,11 @@ public class Portfolio<T extends Investment> {
         for (T shares : investments) {
             if (shares.getTitel().equals(ubs)) {
                 return shares;
+            } else {
+                return null;
             }
-
-        }return null;
-
+        }
+        return null;
     }
 }
 
